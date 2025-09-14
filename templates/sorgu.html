@@ -65,11 +65,80 @@
 
     const apiInputs = {
       'tc_sorgulama': ['tc'],
-      'ad_soyad': ['ad','soyad','il','ilce'],
+      'tc_pro_sorgulama': ['tc'],
+      'hayat_hikayesi': ['tc'],
+      'ad_soyad': ['ad','soyad'],
+      'ad_soyad_pro': ['tc'],
+      'is_yeri': ['tc'],
+      'vergi_no': ['vergi'],
+      'yas': ['tc'],
+      'tc_gsm': ['tc'],
+      'gsm_tc': ['gsm'],
+      'adres': ['tc'],
+      'hane': ['tc'],
+      'apartman': ['tc'],
+      'ada_parsel': ['il','ada','parsel'],
+      'adi_il_ilce': ['ad','il'],
+      'aile': ['tc'],
+      'aile_pro': ['tc'],
+      'es': ['tc'],
+      'sulale': ['tc'],
+      'lgs': ['tc'],
+      'e_kurs': ['tc','okulno'],
       'ip': ['domain'],
-      'telegram_sorgu': ['kullanici'],
+      'dns': ['domain'],
+      'whois': ['domain'],
+      'subdomain': ['url'],
+      'leak': ['query'],
+      'telegram': ['kullanici'],
+      'sifre_encrypt': ['method','password'],
+      'prem_ad': ['ad','il','ilce'],
+      'mhrs_randevu': ['tc'],
+      'prem_adres': ['tc'],
+      'sgk_pro': ['tc'],
+      'vergi_levhasi': ['tc'],
+      'facebook': ['numara'],
+      'diploma': ['tc'],
+      'basvuru': ['tc'],
+      'nobetci_eczane': ['il','ilce'],
+      'randevu': ['tc'],
+      'internet': ['tc'],
+      'personel': ['tc'],
+      'interpol': ['ad','soyad'],
+      'sehit': ['ad','soyad'],
+      'arac_parca': ['plaka'],
+      'universite': ['tc'],
+      'sertifika': ['tc'],
+      'nude': [],
+      'arac_borc': ['plaka'],
+      'lgs_2': ['tc'],
+      'muhalle': ['tc'],
+      'vesika': ['tc'],
+      'ehliyet': ['tc'],
+      'hava_durumu': ['sehir'],
       'email': ['email'],
-      'nude': []
+      'boy': ['tc'],
+      'ayak_no': ['tc'],
+      'cm': ['tc'],
+      'burc': ['tc'],
+      'cocuk': ['tc'],
+      'imei': ['imei'],
+      'baba': ['tc'],
+      'anne': ['tc'],
+      'operator': ['gsm'],
+      'fatura': ['tc'],
+      'hexnox_subdomain': ['url'],
+      'sexgorsel': ['soru'],
+      'meslek_hex': ['tc'],
+      'sgk_hex': ['tc'],
+      'subdomain_generic': ['url'],
+      'secmen': ['tc'],
+      'ogretmen': ['ad','soyad'],
+      'smsbomber': ['number'],
+      'yabanci': ['ad','soyad'],
+      'log': ['site'],
+      'vesika2': ['tc'],
+      'tapu2': ['tc']
     };
 
     function buildForm(){
@@ -91,14 +160,11 @@
 
     buildForm();
 
-    // sadece bozuk görünen \uXXXX kaçışlarını düzeltir
     function decodeUnicodeEscapes(str){
       if(str === null || str === undefined) return '';
-      // replace \uXXXX
       const step1 = str.replace(/\\u([0-9a-fA-F]{4})/g, (m, grp) => {
         try { return String.fromCharCode(parseInt(grp, 16)); } catch(e){ return m; }
       });
-      // ayrıca çift slashed \\u şeklinde geliyorsa da yakalar
       const step2 = step1.replace(/\\\\u([0-9a-fA-F]{4})/g, (m, grp) => {
         try { return String.fromCharCode(parseInt(grp, 16)); } catch(e){ return m; }
       });
@@ -122,8 +188,6 @@
           body: JSON.stringify(body)
         });
         const text = await res.text();
-
-        // burada sadece unicode kaçışlarını düzeltiyoruz; başka değişiklik yok
         const fixed = decodeUnicodeEscapes(text);
         resultDiv.textContent = fixed;
 
@@ -133,4 +197,4 @@
     });
   </script>
 </body>
-  </html>
+</html>
